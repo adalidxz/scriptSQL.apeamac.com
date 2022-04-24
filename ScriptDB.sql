@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [ApeamDB]    Script Date: 23/04/2022 06:49:17 p.m. ******/
+/****** Object:  Database [ApeamDB]    Script Date: 23/04/2022 07:58:00 p.m. ******/
 CREATE DATABASE [ApeamDB]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -80,7 +80,7 @@ ALTER DATABASE [ApeamDB] SET QUERY_STORE = OFF
 GO
 USE [ApeamDB]
 GO
-/****** Object:  Table [dbo].[Proveedores]    Script Date: 23/04/2022 06:49:17 p.m. ******/
+/****** Object:  Table [dbo].[Proveedores]    Script Date: 23/04/2022 07:58:00 p.m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -98,7 +98,7 @@ CREATE TABLE [dbo].[Proveedores](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Inventario]    Script Date: 23/04/2022 06:49:17 p.m. ******/
+/****** Object:  Table [dbo].[Inventario]    Script Date: 23/04/2022 07:58:00 p.m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -114,7 +114,7 @@ CREATE TABLE [dbo].[Inventario](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Productos]    Script Date: 23/04/2022 06:49:17 p.m. ******/
+/****** Object:  Table [dbo].[Productos]    Script Date: 23/04/2022 07:58:00 p.m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -133,20 +133,21 @@ CREATE TABLE [dbo].[Productos](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[V_Productos]    Script Date: 23/04/2022 06:49:17 p.m. ******/
+/****** Object:  View [dbo].[V_Productos]    Script Date: 23/04/2022 07:58:00 p.m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE VIEW [dbo].[V_Productos]
 AS
-SELECT        dbo.Productos.idProducto, dbo.Productos.Producto, dbo.Productos.Descripcion, dbo.Productos.Codigo, dbo.Productos.Active, dbo.Inventario.Stock, dbo.Proveedores.RazonSocial, dbo.Productos.Costo
+SELECT        dbo.Productos.idProducto, dbo.Productos.Producto, dbo.Productos.Descripcion, dbo.Productos.Codigo, dbo.Productos.Active, dbo.Inventario.Stock, dbo.Proveedores.RazonSocial, dbo.Productos.Costo, 
+                         dbo.Productos.idProveedor
 FROM            dbo.Productos INNER JOIN
                          dbo.Proveedores ON dbo.Productos.idProveedor = dbo.Proveedores.idProveedor LEFT OUTER JOIN
                          dbo.Inventario ON dbo.Productos.idProducto = dbo.Inventario.idProducto
 WHERE        (dbo.Productos.Active = 1)
 GO
-/****** Object:  View [dbo].[V_Proveedores]    Script Date: 23/04/2022 06:49:17 p.m. ******/
+/****** Object:  View [dbo].[V_Proveedores]    Script Date: 23/04/2022 07:58:00 p.m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -157,7 +158,7 @@ SELECT        idProveedor, RazonSocial, Direccion, RFC, Actividad, Active
 FROM            dbo.Proveedores
 WHERE        (Active = 1)
 GO
-/****** Object:  Table [dbo].[TipoPagos]    Script Date: 23/04/2022 06:49:17 p.m. ******/
+/****** Object:  Table [dbo].[TipoPagos]    Script Date: 23/04/2022 07:58:00 p.m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -172,7 +173,7 @@ CREATE TABLE [dbo].[TipoPagos](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Entradas]    Script Date: 23/04/2022 06:49:17 p.m. ******/
+/****** Object:  Table [dbo].[Entradas]    Script Date: 23/04/2022 07:58:00 p.m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -192,7 +193,7 @@ CREATE TABLE [dbo].[Entradas](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TipoEntradaSalidas]    Script Date: 23/04/2022 06:49:17 p.m. ******/
+/****** Object:  Table [dbo].[TipoEntradaSalidas]    Script Date: 23/04/2022 07:58:00 p.m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -207,7 +208,7 @@ CREATE TABLE [dbo].[TipoEntradaSalidas](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[V_EntradasProducto]    Script Date: 23/04/2022 06:49:17 p.m. ******/
+/****** Object:  View [dbo].[V_EntradasProducto]    Script Date: 23/04/2022 07:58:00 p.m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -223,7 +224,7 @@ FROM            dbo.Entradas INNER JOIN
                          dbo.TipoPagos ON dbo.Entradas.idTipoPago = dbo.TipoPagos.idTipoPago
 WHERE        (dbo.Entradas.Active = 1)
 GO
-/****** Object:  View [dbo].[V_TipoPagos]    Script Date: 23/04/2022 06:49:17 p.m. ******/
+/****** Object:  View [dbo].[V_TipoPagos]    Script Date: 23/04/2022 07:58:00 p.m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -234,7 +235,7 @@ SELECT        idTipoPago, TipoPago
 FROM            dbo.TipoPagos
 WHERE        (Active = 1)
 GO
-/****** Object:  View [dbo].[V_TipoEntradaSalidas]    Script Date: 23/04/2022 06:49:17 p.m. ******/
+/****** Object:  View [dbo].[V_TipoEntradaSalidas]    Script Date: 23/04/2022 07:58:00 p.m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -245,7 +246,7 @@ SELECT        TOP (100) PERCENT idTipoEntradaSalida, Tipo
 FROM            dbo.TipoEntradaSalidas
 WHERE        (Active = 1)
 GO
-/****** Object:  Table [dbo].[RegistroVenta]    Script Date: 23/04/2022 06:49:17 p.m. ******/
+/****** Object:  Table [dbo].[RegistroVenta]    Script Date: 23/04/2022 07:58:00 p.m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -262,7 +263,7 @@ CREATE TABLE [dbo].[RegistroVenta](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[V_RegistroVentaProductos]    Script Date: 23/04/2022 06:49:17 p.m. ******/
+/****** Object:  View [dbo].[V_RegistroVentaProductos]    Script Date: 23/04/2022 07:58:00 p.m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -276,7 +277,7 @@ FROM            dbo.RegistroVenta INNER JOIN
                          dbo.Productos ON dbo.RegistoVentaProductos.idProcuto = dbo.Productos.idProducto
 WHERE        (dbo.RegistoVentaProductos.Activo = 1)
 GO
-/****** Object:  View [dbo].[V_RegistroVenta]    Script Date: 23/04/2022 06:49:17 p.m. ******/
+/****** Object:  View [dbo].[V_RegistroVenta]    Script Date: 23/04/2022 07:58:00 p.m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -287,7 +288,7 @@ SELECT        idRegistroVenta, FechaVenta, TotalProductos, ValorVenta
 FROM            dbo.RegistroVenta
 WHERE        (Active = 1)
 GO
-/****** Object:  Table [dbo].[RegistroVentaProductos]    Script Date: 23/04/2022 06:49:17 p.m. ******/
+/****** Object:  Table [dbo].[RegistroVentaProductos]    Script Date: 23/04/2022 07:58:00 p.m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -306,7 +307,7 @@ CREATE TABLE [dbo].[RegistroVentaProductos](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Usuarios]    Script Date: 23/04/2022 06:49:17 p.m. ******/
+/****** Object:  Table [dbo].[Usuarios]    Script Date: 23/04/2022 07:58:00 p.m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -609,22 +610,22 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "Inventario"
-            Begin Extent = 
-               Top = 9
-               Left = 401
-               Bottom = 139
-               Right = 571
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
          Begin Table = "Proveedores"
             Begin Extent = 
                Top = 251
                Left = 423
                Bottom = 381
                Right = 593
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "Inventario"
+            Begin Extent = 
+               Top = 9
+               Left = 401
+               Bottom = 139
+               Right = 571
             End
             DisplayFlags = 280
             TopColumn = 0
