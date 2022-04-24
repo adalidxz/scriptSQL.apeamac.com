@@ -8,9 +8,9 @@ La tabla TipoEntradaSalidas debe tener los registros por defualt.
 
 ## Valores por defecto en la base de datos
 
-Tabla de tipo de pagos. \
+Tabla de tipo de pagos.
 
 1	Efectivo	True \
 2	Cheques	True \
 3	Trasferencias	True \
-4	Depositos	True \
+4	Depositos	True 
